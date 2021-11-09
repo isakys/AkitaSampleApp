@@ -1,0 +1,1 @@
+export { HomeComponent as HomeView } from "./home-component";

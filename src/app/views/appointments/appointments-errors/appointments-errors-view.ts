@@ -1,0 +1,1 @@
+export { AppointmentsErrorsComponent as AppointmentsErrorsView } from "./appointments-errors-component";
