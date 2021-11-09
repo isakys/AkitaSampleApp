@@ -13,8 +13,8 @@ export const AppRouter = React.memo(() => {
         <Route exact={true} path={APP_ROUTES.Home} component={HomeView} />
         <Route exact={true} path={APP_ROUTES.Register} component={RegisterView} />
         <Route exact={true} path={APP_ROUTES.Login} component={LoginView} />
-        <Route exact={true} path={APP_ROUTES.Appointments} component={AppointmentsView} />
-        {/* <AuthRoute exact={true} path={APP_ROUTES.Appointments} component={AppointmentsView} /> */}
+        {/* <Route exact={true} path={APP_ROUTES.Appointments} component={AppointmentsView} /> */}
+        <AuthRoute exact={true} path={APP_ROUTES.Appointments} component={AppointmentsView} />
         <Route exact={true} path={APP_ROUTES.Error401} component={Error401View} />
         <Route exact={true} path={APP_ROUTES.Error404} component={Error404View} />
     </Switch>;

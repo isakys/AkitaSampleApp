@@ -6,12 +6,12 @@ import { APP_ROUTES } from "./app-routes";
 
 
 export const AuthRoute = React.memo<RouteProps>(props => {
-    const isUserAuthenticatedObservable = useObservable<any>(() => UserQuery.SelectIsAuthenticated());
-    const isUserAuthenticated = useObservableState<any | null>(isUserAuthenticatedObservable, null);
+    const isAuthenticatedObservable = useObservable<boolean>(() => UserQuery.SelectIsAuthenticated());
+    const isAuthenticated = useObservableState<boolean>(isAuthenticatedObservable, true);
 
-    if (isUserAuthenticated) {
-        return <Route {...props} />
+    if (isAuthenticated) {
+        return <Route {...props} />;
     }
 
-    return <Redirect to={APP_ROUTES.Error401} />
+    return <Redirect to={APP_ROUTES.Error401} />;
 });

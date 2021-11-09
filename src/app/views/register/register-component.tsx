@@ -4,13 +4,22 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { APP_ROUTES } from "../../routes/app-routes";
 import { useRegisterStyles } from "./register-component-styles";
 import { UserService } from "../../stores/user/user-service";
+import { UserQuery } from "../../stores/user/user-query";
+import { useObservable, useObservableState } from "observable-hooks";
+import { LoaderView } from "../loader/loader-view";
 
 export const RegisterComponent = React.memo(() => {
     const classes = useRegisterStyles();
+
+    const isAuthenticatedObservable = useObservable<boolean>(() => UserQuery.SelectIsAuthenticated());
+    const isAuthenticated = useObservableState<boolean>(isAuthenticatedObservable, true);
+
+    const isPendingObservable = useObservable<boolean>(() => UserQuery.SelectIsPending());
+    const isPending = useObservableState<boolean>(isPendingObservable, true);
 
     const formik = useFormik({
         initialValues: {
@@ -23,6 +32,14 @@ export const RegisterComponent = React.memo(() => {
             UserService.RegisterUser(values).subscribe();
         },
     });
+
+    if (isPending) {
+        return <LoaderView />;
+    }
+
+    if(isAuthenticated){
+        return <Redirect to={APP_ROUTES.Home}/>
+    }
 
     return <Grid container={true} justifyContent="center" alignItems="center" className={classes.Container}>
         <Grid item={true} xs={12} md={6} container={true} justifyContent="center" alignItems="center" className={classes.RegisterWrapper}>

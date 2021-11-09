@@ -6,6 +6,10 @@ import { AppointmentsQuery } from "../../stores/appointments/appointments-entity
 import { AppointmentService } from "../../stores/appointments/appointments-entity-service";
 import { AppointmentsErrorsView } from "./appointments-errors/appointments-errors-view";
 import { AppointmentsComponent } from "./appointments-component";
+import { APP_ROUTES } from "../../routes/app-routes";
+import { Redirect } from "react-router";
+import { UserService } from "../../stores/user/user-service";
+import { UserQuery } from "../../stores/user/user-query";
 
 interface ContainerProps {
     appointments: AppointmentsContracts.AppointmentsList;
